@@ -2,6 +2,9 @@ name: Update changelog
 
 on:
   workflow_call:
+    secrets:
+      CHECKOUT_ACTION_TOKEN:
+        required: true
 
 jobs:
   update:
@@ -17,6 +20,7 @@ jobs:
           # Checkout target branch of this release. Ensures that the CHANGELOG
           # is not out of date.
           ref: ${{ github.event.release.target_commitish }}
+          token: ${{ secrets.CHECKOUT_ACTION_TOKEN }}
 
       - name: Extract release date from git tag
         id: release_date
